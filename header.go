@@ -5,6 +5,6 @@ type Header struct {
 	vid byte // VELA Circuit ID
 }
 
-func (header Header) parse() []byte {
+func (header Header) Parse() []byte {
 	return []byte{header.vc, header.vid}
 }
