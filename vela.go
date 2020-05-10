@@ -50,10 +50,18 @@ func main() {
 	addr, _ := netlink.ParseAddr(localIP)
 
 	// Configure the link
-	_ = netlink.LinkSetMTU(link, MTU)
-	_ = netlink.AddrAdd(link, addr)
-	_ = netlink.LinkSetUp(link)
-
+	err = netlink.LinkSetMTU(link, MTU)
+	if err != nil {
+		log.Fatalln("Error setting link attribute: ", err)
+	}
+	err = netlink.AddrAdd(link, addr)
+	if err != nil {
+		log.Fatalln("Error setting link attribute: ", err)
+	}
+	err = netlink.LinkSetUp(link)
+	if err != nil {
+		log.Fatalln("Error setting link attribute: ", err)
+	}
 
 	// Resolve remote address
 	remote, err := net.ResolveUDPAddr("udp", remoteIP+":"+strconv.Itoa(PORT))
