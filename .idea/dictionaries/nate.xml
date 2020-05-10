@@ -1,7 +1,10 @@
 <component name="ProjectDictionaryState">
   <dictionary name="nate">
     <words>
+      <w>buffersize</w>
       <w>creq</w>
+      <w>iface</w>
+      <w>netdevices</w>
       <w>remoteaddr</w>
       <w>usev</w>
     </words>
