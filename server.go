@@ -7,7 +7,6 @@ import (
 	"net"
 	"os"
 	"strconv"
-	"time"
 )
 
 // Temporary configuration constants
@@ -20,28 +19,6 @@ const (
 
 var preprocessor func([]byte) []byte = nil
 var postprocessor func([]byte) []byte = nil
-
-// VC (VELA Control) Codes
-const (
-	VC_NOP  byte = 0 // No Operation
-	VC_IREQ byte = 1 // Session Initialization Request
-	VC_IACK byte = 2 // Session Initialization Acknowledgement
-	VC_ICON byte = 3 // Session Initialization Confirmation
-	VC_CREQ byte = 4 // Session Closure Request
-)
-
-type Header struct {
-	vc  byte
-	vid byte
-}
-
-func payloadToHeader(payload []byte) Header {
-	return Header{payload[0], payload[1]}
-}
-
-func parseHeader(header Header) []byte {
-	return []byte{header.vc, header.vid}
-}
 
 // Protocol-specific constants
 const (
@@ -119,7 +96,6 @@ func main() {
 	}()
 
 	buffer := make([]byte, mtu)
-	rand.Seed(time.Now().Unix())
 
 	fmt.Println("Ready on " + host + ":" + strconv.Itoa(int(port)))
 
