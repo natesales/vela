@@ -29,6 +29,14 @@ func random(min, max int) int {
 	return rand.Intn(max-min) + min
 }
 
+func Write(connection net.UDPConn, source net.IP, vid byte, header Header, payload []byte) bool {
+	_, err := connection.WriteToUDP(append(header.Parse(), payload...), Get(source, vid)) // TODO: need to fix the Get method
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+}
+
 func main() {
 	var addr net.IP
 
@@ -104,7 +112,7 @@ func main() {
 		incoming := buffer[0:n]
 
 		vc := incoming[0]
-		vid := incoming[1]
+		//vid := incoming[1]
 
 		fmt.Print(addr, " sent ")
 
