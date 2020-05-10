@@ -13,6 +13,7 @@ import (
 // Usage: vela [local network] [remote]
 
 var (
+	PORT       = 48621 // Default VELA UDP port
 	BUFFERSIZE = 9000
 	MTU        = BUFFERSIZE - 8 - 1 - 20 // 8-byte UDP header, 1-byte VELA Circuit ID, and 20 byte IP header
 	localIP    = os.Args[1]              // IP with mask
