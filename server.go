@@ -101,12 +101,12 @@ func main() {
 
 	for {
 		n, addr, err := connection.ReadFromUDP(buffer)
-		header, payload := Read(buffer[0:n])
+		ok, header, payload := Read(buffer[0:n])
 
 		fmt.Println(header.VC)
 		fmt.Println(header.VID)
 
-		if header != (Header{}) { // If header not empty
+		if ok {
 			fmt.Println("Data received:")
 
 			fmt.Print(addr, " sent ")

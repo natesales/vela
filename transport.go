@@ -18,12 +18,12 @@ func Write(connection net.UDPConn, source net.IP, vid byte, header Header, paylo
 }
 
 // [vc, vid, ...]
-func Read(incoming []byte) (Header, []byte) { // Returns header and payload
+func Read(incoming []byte) (bool, Header, []byte) { // Returns header and payload
 	if len(incoming) >= HEADER_SIZE { // If incoming is less than a valid header, then we can't do anything.
 		fmt.Println("Header good, returning.")
-		return Header{incoming[0], incoming[1]}, incoming[2:]
+		return true, Header{incoming[0], incoming[1]}, incoming[2:]
 	} else {
 		fmt.Println("Header too small.")
-		return Header{}, nil // If incoming is invalid data, return nil values.
+		return false, Header{}, nil // If incoming is invalid data, return nil values.
 	}
 }
