@@ -1,0 +1,9 @@
+vela0:
+  remote: 10.0.0.18:1
+  id: 1
+  network: 172.16.16.1/31
+
+vela1:
+  remote: 10.0.0.200
+  id: 2
+  network: face::/24
