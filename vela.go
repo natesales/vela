@@ -14,10 +14,9 @@ import (
 
 var (
 	BUFFERSIZE = 9000
-	MTU        = BUFFERSIZE - 8 - 1 // 8-byte UDP header and 1-byte VELA Circuit ID
-	localIP    = os.Args[1]         // IP with mask
+	MTU        = BUFFERSIZE - 8 - 1 - 20 // 8-byte UDP header, 1-byte VELA Circuit ID, and 20 byte IP header
+	localIP    = os.Args[1]              // IP with mask
 	remoteIP   = os.Args[2]
-	port       = 4321
 )
 
 func main() {
@@ -55,14 +54,15 @@ func main() {
 	_ = netlink.AddrAdd(link, addr)
 	_ = netlink.LinkSetUp(link)
 
+
 	// Resolve remote address
-	remote, err := net.ResolveUDPAddr("udp", remoteIP+":"+strconv.Itoa(port))
+	remote, err := net.ResolveUDPAddr("udp", remoteIP+":"+strconv.Itoa(PORT))
 	if nil != err {
 		log.Fatalln("Unable to resolve remote addr:", err)
 	}
 
 	// Inbound Listener
-	listenerAddr, err := net.ResolveUDPAddr("udp", ":"+strconv.Itoa(port)) // TODO: Explicit local listen address?
+	listenerAddr, err := net.ResolveUDPAddr("udp", ":"+strconv.Itoa(PORT)) // TODO: Explicit local listen address?
 	if nil != err {
 		log.Fatalln("Unable to resolve listener UDP socket:", err)
 	}
@@ -76,6 +76,8 @@ func main() {
 
 	// Receive Goroutine
 	go func() {
+		// TODO: automatic buffer adjustment from link.Attrs().MTU
+
 		buffer := make([]byte, BUFFERSIZE)
 
 		for {

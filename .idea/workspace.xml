@@ -43,6 +43,11 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/v1" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="go build test.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="vela" />
@@ -120,9 +125,9 @@
       <screen x="0" y="24" width="2560" height="1416" />
     </state>
     <state x="1051" y="647" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589137985208" />
-    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup" timestamp="1589072816630">
+    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup" timestamp="1589139083832">
       <screen x="0" y="24" width="2560" height="1416" />
     </state>
-    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589072816630" />
+    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589139083832" />
   </component>
 </project>
