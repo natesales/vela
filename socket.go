@@ -15,7 +15,7 @@ import (
 var (
 	BUFFERSIZE = 9000
 	MTU        = BUFFERSIZE - 8 - 1 // 8-byte UDP header and 1-byte VELA Circuit ID
-	localIP    = os.Args[1]   // IP with mask
+	localIP    = os.Args[1]         // IP with mask
 	remoteIP   = os.Args[2]
 	port       = 4321
 )
