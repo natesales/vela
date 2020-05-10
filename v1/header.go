@@ -1,4 +1,4 @@
-package main
+package v1
 
 const HEADER_SIZE = 2 // Header size in bytes
 
