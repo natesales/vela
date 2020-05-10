@@ -29,14 +29,6 @@ func random(min, max int) int {
 	return rand.Intn(max-min) + min
 }
 
-func Write(connection net.UDPConn, source net.IP, vid byte, header Header, payload []byte) bool {
-	_, err := connection.WriteToUDP(append(header.Parse(), payload...), Get(source, vid)) // TODO: need to fix the Get method
-	if err != nil {
-		fmt.Println(err)
-		return false
-	}
-}
-
 func main() {
 	var addr net.IP
 
@@ -109,32 +101,40 @@ func main() {
 
 	for {
 		n, addr, err := connection.ReadFromUDP(buffer)
-		incoming := buffer[0:n]
+		header, payload := Read(buffer[0:n])
 
-		vc := incoming[0]
-		//vid := incoming[1]
+		fmt.Println(header.VC)
+		fmt.Println(header.VID)
 
-		fmt.Print(addr, " sent ")
+		if header != (Header{}) { // If header not empty
+			fmt.Println("Data received:")
 
-		switch vc {
-		case VC_NOP:
-			fmt.Println("VC-NOP")
-		case VC_IREQ:
-			fmt.Println("VC-IREQ")
-		case VC_IACK:
-			fmt.Println("VC-IACK")
-		case VC_ICON:
-			fmt.Println("VC-ICON")
-		case VC_CREQ:
-			fmt.Println("VC-CREQ")
-		default: // If VC is unknown
-			fmt.Println("Unknown VC" + strconv.Itoa(int(vc)))
-		}
+			fmt.Print(addr, " sent ")
 
-		_, err = connection.WriteToUDP([]byte{'0'}, addr)
-		if err != nil {
-			fmt.Println(err)
-			return
+			switch header.VC {
+			case VC_NOP:
+				fmt.Println("VC-NOP")
+			case VC_IREQ:
+				fmt.Println("VC-IREQ")
+			case VC_IACK:
+				fmt.Println("VC-IACK")
+			case VC_ICON:
+				fmt.Println("VC-ICON")
+			case VC_CREQ:
+				fmt.Println("VC-CREQ")
+			default: // If VC is unknown
+				fmt.Println("Unknown VC" + strconv.Itoa(int(header.VC)))
+			}
+
+			fmt.Println("Payload: " + string(payload)) // TODO: This is just to make GoLand happy
+
+			_, err = connection.WriteToUDP([]byte{'0'}, addr)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		} else { // If header is invalid, discard the packet. TODO: Maybe log this?
+			fmt.Println("Invalid header, discarding packet")
 		}
 	}
 }
