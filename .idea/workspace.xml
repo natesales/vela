@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e442fc9e-550b-43ab-8033-cc0cc3e4d26a" name="Default Changelist" comment="Extract boolean for success check">
-      <change beforePath="$PROJECT_DIR$/dev/send.go" beforeDir="false" afterPath="$PROJECT_DIR$/dev/send.go" afterDir="false" />
+    <list default="true" id="e442fc9e-550b-43ab-8033-cc0cc3e4d26a" name="Default Changelist" comment="Extract circuit">
+      <change afterPath="$PROJECT_DIR$/interfaces.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/connection.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vela.go" beforeDir="false" afterPath="$PROJECT_DIR$/vela.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vela.yml" beforeDir="false" afterPath="$PROJECT_DIR$/vela.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="vela" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -66,7 +74,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Init" />
     <MESSAGE value="Add GoLand profiles" />
     <MESSAGE value="Create README.md" />
     <MESSAGE value="Add example client" />
@@ -90,17 +97,19 @@
     <MESSAGE value="Move dev code to new folder" />
     <MESSAGE value="Add doc" />
     <MESSAGE value="Extract boolean for success check" />
-    <option name="LAST_COMMIT_MESSAGE" value="Extract boolean for success check" />
+    <MESSAGE value="Add config file parser" />
+    <MESSAGE value="Add example config file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add example config file" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1013" y="480" width="524" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589139995039">
+    <state x="1013" y="480" width="524" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589148746644">
       <screen x="0" y="24" width="2560" height="1416" />
     </state>
-    <state x="1013" y="480" width="524" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589139995039" />
-    <state x="357" y="224" width="1549" height="974" key="CommitChangelistDialog2" timestamp="1589137816580">
+    <state x="1013" y="480" width="524" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589148746644" />
+    <state x="357" y="224" width="1549" height="974" key="CommitChangelistDialog2" timestamp="1589160138889">
       <screen x="0" y="24" width="2560" height="1416" />
     </state>
-    <state x="357" y="224" width="1549" height="974" key="CommitChangelistDialog2/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589137816580" />
+    <state x="357" y="224" width="1549" height="974" key="CommitChangelistDialog2/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589160138889" />
     <state width="2514" height="381" key="GridCell.Tab.0.bottom" timestamp="1589085628785">
       <screen x="0" y="24" width="2560" height="1416" />
     </state>
@@ -129,9 +138,9 @@
       <screen x="0" y="24" width="2560" height="1416" />
     </state>
     <state x="1051" y="647" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589137985208" />
-    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup" timestamp="1589139083832">
+    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup" timestamp="1589147756996">
       <screen x="0" y="24" width="2560" height="1416" />
     </state>
-    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589139083832" />
+    <state x="943" y="347" width="672" height="678" key="search.everywhere.popup/0.24.2560.1416/2560.0.1920.1080@0.24.2560.1416" timestamp="1589147756996" />
   </component>
 </project>
