@@ -2,8 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/songgao/water"
 	"log"
 	"net"
+)
+
+var (
+	remote string = "10.0.0.27:48621"
 )
 
 var (
@@ -16,6 +21,8 @@ func main() {
 
 	circuits := ParseConfig()
 
+	var links map[*net.UDPAddr]*water.Interface
+
 	for _, circuit := range circuits {
 		SetInterface(circuit.Iface, circuit.Network, MTU)
 
@@ -25,40 +32,44 @@ func main() {
 			log.Fatalln("Unable to resolve remote addr:", err)
 		}
 
-		// Receive Goroutine
 		go func() {
-			// TODO: automatic buffer adjustment from link.Attrs().MTU
-
-			buffer := make([]byte, BUFFERSIZE)
-
+			// Transmit in primary Goroutine
+			packet := make([]byte, BUFFERSIZE)
 			for {
-				n, addr, err := listenerConn.ReadFromUDP(buffer)
-				vid := buffer[0]
-
-				if err != nil || n == 0 {
-					fmt.Println("Error: ", err)
+				packetLength, err := circuit.Iface.Read(packet)
+				if err != nil {
+					break
 				}
 
-				_, _ = circuit.Iface.Write(buffer[1:n]) // Only write the payload to the interface TODO: If error in transmit, send a message requesting the previous packet
+				pkt := append([]byte{2}, packet[:packetLength]...) // Prepend Circuit ID
 
-				fmt.Println(addr, "vid", vid)
+				_, err = listenerConn.WriteToUDP(pkt, remote)
+				if err != nil {
+					log.Println("Error sending data over UDP connection:", err)
+				}
 			}
 		}()
+	} // End circuit enumeration
 
-		// Transmit in primary Goroutine
-		packet := make([]byte, BUFFERSIZE)
-		for {
-			packetLength, err := circuit.Iface.Read(packet)
-			if err != nil {
-				break
-			}
+	// Receive Goroutine
+	// TODO: automatic buffer adjustment from link.Attrs().MTU
 
-			pkt := append([]byte{2}, packet[:packetLength]...) // Prepend Circuit ID
+	buffer := make([]byte, BUFFERSIZE)
 
-			_, err = listenerConn.WriteToUDP(pkt, remote)
-			if err != nil {
-				log.Println("Error sending data over UDP connection:", err)
-			}
+	for {
+		n, addr, err := listenerConn.ReadFromUDP(buffer)
+		vid := buffer[0]
+
+		if err != nil || n == 0 {
+			fmt.Println("Error: ", err)
 		}
+
+		if remoteUDPConn, ok := links[addr]; ok { // If address exists in map
+			go func() {
+				_, _ = remoteUDPConn.Write(buffer[1:n]) // Only write the payload to the interface TODO: If error in transmit, send a message requesting the previous packet
+			}()
+		} // If address isn't in the map, discard packet.
+
+		fmt.Println(addr, "vid", vid)
 	}
 }
