@@ -80,7 +80,7 @@ func ParseConfig() []CircuitConfig {
 		} else if len(_remote) < 1 || len(_remote) > 2 {
 			log.Fatalln("Remote must be an IPv4 or IPv6 address with or without a port.")
 		} else {
-			port = strconv.Itoa(PORT) // Default port, type is string to avoid further parsing for compatibility with the UDP resolver
+			port = "100" // Default port, type is string to avoid further parsing for compatibility with the UDP resolver
 		}
 
 		remote = net.ParseIP(_remote[0])
