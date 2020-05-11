@@ -18,7 +18,7 @@ VELA (the Virtual Ethernet Link Application) is a modern userspace pseudowire pr
 
 ### Performance
 
-VELA operates on a UDP underlay and uses a 1-byte circuit identifier, resulting in a 9-byte header. VELA accounts for the standard 20-byte IP header, so the final MTU will be decremented by 29 bytes. VELA has full support for jumbo frames or other nonstandard MTU sizes, and can automatically scale buffer size based on the interface MTU.
+VELA operates on a UDP underlay and uses a 1-byte circuit identifier, resulting in a 9-byte header. VELA accounts for the standard 20-byte IP header, so the final MTU will be decremented by 29 bytes. VELA has full support for jumbo frames or other nonstandard MTU sizes and can automatically scale buffer size based on the interface MTU.
 
 VELA offers very minimal overhead. Between 2 Linux hosts running a circuit on 1 gigabit interfaces, we can get very nearly line rate speed with a single iperf3 stream.
 
